@@ -1,6 +1,82 @@
-#openOptions {
+@font-face {
+  font-family: "Raleway-Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  format("truetype");
+}
 
+@font-face {
+  font-family: "Raleway-Semibold";
+  src: url("../fonts/Raleway-Semibold.ttf");
+  format("truetype");
+}
+
+h1, h2, h3, h4 {
+    font-family: "Raleway-Semibold", sans-serif;
+}
+
+div {
+  font-family: "Raleway-Thin", sans-serif;
 }
 
 
-/* add custom styles */
+#openOptions {
+
+}
+ header {
+   text-align: center;
+ }
+
+.mainForm {
+  text-align:center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+#map (
+  height: 40%;
+  width: 40%
+  )
+
+.mapPane {
+}
+
+#newLocName {
+  display: inline-block;
+  display: none;
+}
+
+
+.inputMain, main, html {
+  background-color: #e8b77b
+}
+
+#leavingHours {
+  float: left
+}
+
+form {
+  background-color: #87d1ff
+}
+
+footer {
+  background-color: #aa7be8;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  justify-content: flex-end;
+}
+
+.extraOptions {
+  display: inline-block;
+  display:none;
+}
+
+.savedLocations {
+  display: inline-block;
+  display:none;
+}
+/*this chould center the main form box, but doesn't, because of course it doesn't.*/
+/*.center_div{
+    margin: 0 auto;
+    width:60% /
+}*/

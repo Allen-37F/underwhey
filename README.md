@@ -1,4 +1,4 @@
-Wselcome to UnderWhey, my unit 1 project!
+Welcome to UnderWhey, my unit 1 project!
 
 Link to Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1783231
 
