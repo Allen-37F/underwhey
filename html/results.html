@@ -8,20 +8,63 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
   </head>
   <body>
+    <nav>
+      <div class="userData">
+        Welcome, <span id="userName">Allen</span>!
+      </div>
+      <div class="manageSettings">
+        <a href="../../index.html">Return to Main</a>
+      </div>
+      <div class="manageSettings">
+        <a href="settings.html">Manage your settings</a>
+      </div>
+    </nav>
+
     <main class="resultsMain">
       <header>
         <h1>Here are your trip details</h1>
         <h4>Brought to you by UnderWhey</h4>
       </header>
 
-      <form class="container col-lg-10 col-lg-offset-1" action="index.html" method="post">
+
+      <form class="container col-xs-12 col-sm-10 col-md-8 col-lg-offset-3 col-md-offset-2 col-sm-offset-1 col-lg-6 resultsForm" action="index.html" method="post">
         <div class="form-group">
-          Content TBD
+          <h2>You're going to <span id="yourDest">Galvanize Golden Triangle</h2>
+        </div>
+        <div class="form-group">
+          <h3>Travel time to destination: <span id="travelTime">44 minutes</span>.<br><span id="trafficDelay"> There is an expected traffic delay of 18 minutes. </span></h3>
+        </div>
+        <div class="form-group">
+          <h3>Weather at destination on arrival: <span id="weather">76 degrees |  scattered showers</span>.</h3>
+        </div>
+        <div class="form-group">
+          <h3>Don't forget to bring:</h3>
+          <div class="form-group ">
+            <ul class="packingList">
+              <li>Laptop and charger</li>
+              <li>Packed lunch</li>
+              <li>Umbrella</li>
+              <li>Galvanize keycard</li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <h3>What should I listen to?</h3>
+          <ul id="audioRecommendations"><h5>Podcasts:</h5>
+            <li>Javascript Jabber #223 - WebStorm with Dennis Ushakov | Length: 42 minutes</li>
+            <li>{Coding Blocks} #44 - Stack Overflow Salaries and Landing the Job | Length: 44 minutes</li>
+            <li>Reply All #71 - The Picture Taker | Length: 41 minutes</li>
+            <li>Stuff You Should Know #446 - How the Moonwalk Works | Length - 45 minutes</li>
+            <h5>Audio Books</h5>
+            <li>Pillars of the Earth - by Ken Follett</li>
+            <li>The Art of Racing in the Rain - by Garth Stein</li>
+            <li>Kama Sutra for the Visually Impaired - by Vātsyāyana</li>
+          </ul>
         </div>
       </form>
 
 
-    <footer class="footer center-div container col-xs-12 col-sm-10 col-md-8 col-lg-offset-4 col-md-offset-2 col-sm-offset-1 col-lg-4">
+    <footer class="footer center-div container col-xs-12 col-sm-10 col-md-8 col-lg-offset-3 col-md-offset-2 col-sm-offset-1 col-lg-6">
       <div class="">
         Allen Fordham 2016 | All rights reserved | <a href="mailto:allen.s.fordham@gmail.com">Got feedback?</a>
 
