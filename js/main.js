@@ -1,6 +1,6 @@
 
 $(document).on('ready', function() {
-  console.log('sanity check!');
+  console.log('so far, so good!');
 });
 
 $("form").on("submit", function(e) {
@@ -12,18 +12,18 @@ $("form").on("submit", function(e) {
 
 
 $('#openOptions').on('change', function (e) {
-  console.log('!');
+  // console.log('!');
   $(".extraOptions").toggle();
 })
 
 $('#savedLocation').on('change', function (e) {
-  console.log('Change saved location!');
+  // console.log('Change saved location!');
   $(".savedLocations").toggle();
   $("#destination").toggle();
   $("#saveThisLoc").toggle();
 })
 
 $('#saveThisLoc').on('change', function (e) {
-  console.log('Changes something again!');
+  // console.log('Changes something again!');
   $("#newLocName").toggle();
 })
