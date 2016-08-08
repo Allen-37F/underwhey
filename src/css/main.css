@@ -10,18 +10,15 @@
   format("truetype");
 }
 
-h1, h2, h3, h4 {
-    font-family: "Raleway-Semibold", sans-serif;
-}
-
 div {
   font-family: "Raleway-Thin", sans-serif;
 }
 
-
-#openOptions {
-
+h1, h2, h3, h4 {
+    font-family: "Raleway-Semibold", sans-serif;
 }
+
+
  header {
    text-align: center;
  }
@@ -30,7 +27,8 @@ div {
   text-align:center;
   justify-content: center;
   padding: 10px;
-  border-radius: 15px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 #map (
@@ -75,8 +73,7 @@ footer {
   display: inline-block;
   display:none;
 }
-/*this chould center the main form box, but doesn't, because of course it doesn't.*/
-/*.center_div{
-    margin: 0 auto;
-    width:60% /
-}*/
+
+.btn-lg {
+  background-color: #aa7be8
+}

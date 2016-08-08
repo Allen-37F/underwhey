@@ -15,3 +15,15 @@
     "run-sequence": "^1.2.2"
   }
 }
+
+
+/*Google API login info - not sure what to do with this though*/
+{"web":
+  {
+  "client_id":"499170777111-00sp0ot5mbe8qgt22u9vhbfa6gapml5t.apps.googleusercontent.com",
+  "project_id":"my-project-1470674370992",
+  "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+  "token_uri":"https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+  "client_secret":"jrryuhJuYFfGbgEvg9KlADnx",
+  "javascript_origins":["http://localhost:8000"]}}
