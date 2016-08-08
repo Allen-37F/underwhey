@@ -14,16 +14,23 @@ div {
   font-family: "Raleway-Thin", sans-serif;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
     font-family: "Raleway-Semibold", sans-serif;
 }
 
+nav {
+  background-color: transparent;
+  text-align: right;
+  float: right;
+  padding-right: 20px;
+}
 
  header {
    text-align: center;
+
  }
 
-.mainForm {
+.mainForm, .resultsForm {
   text-align:center;
   justify-content: center;
   padding: 10px;
@@ -53,6 +60,20 @@ h1, h2, h3, h4 {
   float: left
 }
 
+.resultsForm {
+  text-align: center;
+}
+
+.packingList {
+  /*float: left;*/ XXX
+  /*align-items: flex-start;*/
+  flex-flow: row;
+}
+
+#trafficDelay {
+  color: red
+}
+
 form {
   background-color: #87d1ff
 }
@@ -76,4 +97,8 @@ footer {
 
 .btn-lg {
   background-color: #aa7be8
+}
+
+a {
+  color: black
 }

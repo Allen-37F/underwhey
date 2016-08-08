@@ -8,6 +8,16 @@
     <link rel="stylesheet" type="text/css" href="src/css/main.css">
   </head>
   <body>
+    <nav>
+      <div class="userData">
+        Welcome, <span id="userName">Allen</span>!
+      </div>
+      <div class="manageSettings">
+        <a href="src/html/settings.html">Manage your settings</a>
+      </div>
+    </nav>
+
+
     <main class="inputMain">
 
     <header>
@@ -41,7 +51,7 @@
         </div>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" id="openOptions"> Extra options</label>
+        <label><input type="checkbox" id="openOptions"> Show extra options</label>
       </div>
       <div class="extraOptions form-group " >
         <label for="options">I am leaving:</label>
@@ -60,13 +70,13 @@
         </label>hours
         <br>
         <div class="checkbox divider">
-          <label><input type="checkbox" id="dogToo"> I'm bringing </span id="dogname">Elsie!</span></label>
+          <label><input type="checkbox" id="dogToo"> I'm bringing </span id="dogName">Elsie!</span></label>
         </div>
 
         <label for="options">Parameter 3</label>
         <input type="options" class="form-control" id="options">
       </div>
-      <button type="submit" class="btn-lg btn-default">Let's go!</button>
+      <button type="submit" class="submitBtn btn-lg btn-default" title"Click here to find out what you'll need for your trip!"><a href="src/html/results.html">Let's go!</a></button>
     </form>
 
 
