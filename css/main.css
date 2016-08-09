@@ -10,6 +10,11 @@
   format("truetype");
 }
 
+html {
+  background-image: url('../../images/pic2.jpg');
+  background-size: 100%;;
+}
+
 div {
   font-family: "Raleway-Thin", sans-serif;
 }
@@ -53,7 +58,7 @@ nav {
 
 
 .inputMain, main, html {
-  background-color: #e8b77b
+  background-color: #318F98
 }
 
 #leavingHours {
@@ -75,14 +80,19 @@ nav {
 }
 
 form {
-  background-color: #87d1ff
+  background-color: #51f0ff
 }
 
 footer {
-  background-color: #aa7be8;
+  background-color: #205f65;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   justify-content: flex-end;
+  color: white;
+}
+
+footer a {
+  color: white;
 }
 
 .extraOptions {
@@ -96,7 +106,9 @@ footer {
 }
 
 .btn-lg {
-  background-color: #aa7be8
+  background-color: #205f65
+  color: white;
+
 }
 
 a {
