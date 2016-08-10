@@ -8,7 +8,7 @@ $('form').on('submit', function(e) {
 
   console.log('caught submit data');
   var destination = $('#destination').val();
-  console.log(destination);
+  // console.log(destination);
 });
 
 $('#openOptions').on('change', function (e) {
@@ -28,36 +28,81 @@ $('#saveThisLoc').on('change', function (e) {
   $('#newLocName').toggle();
 });
 
-
-var key ='AIzaSyDpCDHuCq0nnxnIIqkSlk--DU5sZ6lIBFw'
-var url = 'http://galvanize-cors-proxy.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=39.799395,-105.085765&destination=Universal+Studios+Hollywood4&key=' + key;
-console.log(url);
- $.ajax({
+//This is my query to google, finding out the length of the trip with traffic. The following variables will go into the query:
+const KEY = '&key=AIzaSyDpCDHuCq0nnxnIIqkSlk--DU5sZ6lIBFw';
+var timeNow = Date.now();
+// nowPlus= function(hours) {
+//   (timeNow + (3600000 * Number.hours));
+// };
+// console.log(nowPlus(2));
+// console.log('current time in ms: ' + timeNow);
+var departureTime = '&departure_time=' + timeNow;
+var traffic = '&traffic_model=best_guess';
+var duration = null;
+var durationInTraffic = null;
+//Origin is my house on Allison and destination is Galvanize in this example
+var originPrefix = "origin="
+var origin = '39.799395,-105.085765'
+var destPrefix = '&destination='
+var destination = '39.733594,-104.992604';
+var url = 'http://galvanize-cors-proxy.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?'+originPrefix+ origin + destPrefix + destination + departureTime + traffic + KEY;
+// console.log(url);
+$.ajax({
   method: 'GET',
   // jsonp: 'callback',
   // dataType: 'jsonp',
   url: url
 }).done(function (results) {
-   console.log(results);
-   console.log(results.routes[0].legs[0].duration.text);
-   //parse the results and make another AJAX call here (itunes and wunderground)
- })
+  duration = results.routes[0].legs[0].duration.text;
+  // console.log('duration: ' + duration);
+  // return duration;
+  durationInTraffic = results.routes[0].legs[0].duration_in_traffic.text;
+  // console.log('Duration in traffic: ' + durationInTraffic);
+  // return durationInTraffic;
+
+  //parse the results and make another AJAX call here (itunes and wunderground) I'll need tonest the AJAX call inside this function or I won't have access to the duration and durationInTraffic values.
+});
+// These are null in this position because I log them without waiting for the above ajax call to give them values.
+// console.log('Duration in traffic: '+durationInTraffic);
+// console.log('duration: ' + duration);
 
 //google navigation API request parameters:
 //departure_time (either 'now' or an integer in seconds since 1970)
-// var key ='AIzaSyDpCDHuCq0nnxnIIqkSlk--DU5sZ6lIBFw'
 
+//This is the iTunes API Call. Looks like it works!
+const ITUNES_URL = 'https://itunes.apple.com/search';
+//XXX change inputs for these two parameters
+var artist = 'stuffyoushouldknow';
+var milliseconds = 10000000;
+var queryString = '?term=' + artist + '&kind=podcast';
+const ITUNES_QUERY = ITUNES_URL + queryString;
+// console.log(URL);
+$.ajax({
+  method: 'GET',
+  jsonp: 'callback',
+  dataType: 'jsonp',
+  url: ITUNES_QUERY
+}).done(function (results) {
+  // console.log(results);
 
+  for (var i = 0; i < results.length; i++) {
+    // console.log('test' + results.results[i].trackTimeMillis);
+    if (results.results[i].trackTimeMillis > 1000000) {
+      // console.log('working so far!');
+    }
+    // console.log(results.results[8].trackTimeMillis);
+    //parse the results and make another AJAX call here (itunes and wunderground)
+  }
+});
 
-
-//let's try a call to Google's API for podcasts by length. I don't have high hopes... nope CORS problem again, apparently.
-// var $xhr = $.getJSON('https://itunes.apple.com/search?entity=podcast');
-// $xhr.done(function(data) {
-//     if ($xhr.status !== 200) {
-//         return;
-//     }
-//     console.log(data);
-// });
-// $xhr.fail(function(err) {
-//     console.log(err);
-// });
+//Wunderground API call for destination weather:
+const WEATHER_URL =
+console.log();
+$.ajax({
+  method: 'GET',
+  jsonp: 'callback',
+  dataType: 'jsonp',
+  url: WEATHER_URL
+}).done(function (results) {
+  console.log(results);
+});
