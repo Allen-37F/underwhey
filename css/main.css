@@ -30,7 +30,7 @@ nav {
   padding-right: 20px;
 }
 
- header {
+header {
    text-align: center;
    background-color: #205f65;
    color: white;
@@ -42,6 +42,9 @@ nav {
   padding: 10px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+}
+.resultsForm {
+  display: none;
 }
 
 #map (
@@ -111,4 +114,8 @@ footer a {
 
 a {
   color: black
+}
+
+.footer2 {
+  display: none;
 }
