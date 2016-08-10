@@ -58,8 +58,6 @@ $('form').on('submit', function(e) {
 
   $.ajax({
     method: 'GET',
-    // jsonp: 'callback',
-    // dataType: 'jsonp',
     url: mapsUrl
   }).done(function(results) {
     let dest = results.routes[0].legs[0];
@@ -69,14 +67,32 @@ $('form').on('submit', function(e) {
     console.log('Duration in current traffic: ' + durationInTraffic);
     destLatLong = dest.end_location.lat + ',' + dest.end_location.lng;
     destTitle = dest.end_address.substring(0, dest.end_address.indexOf(','));
+    var delay = durationInTraffic - duration.parseInt;
     console.log('title of destination: ' + destTitle);
 
+    //Plugging a few things into the results form
+    $('#yourDest').html(destTitle);
+    $('#travelTime').html(durationInTraffic);
+
+    console.log("delay: " + delay)
+    positiveDelay = function() {
+      if (delay >1) {
+        $('#trafficDelay').html(delay);
+      } else {
+        $('#delayYes').html();
+      }
+    }
+
+
+    console.log(destTitle);
     //I probably should parse some results?
 
     //This is the iTunes API Call. Looks like it works!
     const ITUNES_URL = 'https://itunes.apple.com/search';
-    //XXX change inputs for these two parameters
+    //XXX change inputs for this parameter
     var artist = 'stuffyoushouldknow';
+    var milliseconds = (parseInt(durationInTraffic) * 60000);
+    console.log('Your trip will currently have a duration of ' + milliseconds + ', searching for podcasts that match your commute.');
     var queryString = '?term=' + artist + '&kind=podcast';
     const ITUNES_QUERY = ITUNES_URL + queryString;
     // console.log(URL);
@@ -87,8 +103,7 @@ $('form').on('submit', function(e) {
       url: ITUNES_QUERY
     }).done(function(results) {
       //DurationInTraffic isn't right if the trip is more than an hour long because parsing; perhaps suggest the user listen to anything he/she wants?
-      var milliseconds = (parseInt(durationInTraffic) * 60000);
-      console.log('Your trip will currently have a duration of ' + milliseconds + ', searching for podcasts that match your commute.');
+
       // console.log(results);
       //trying to sort the results and collect a few with acceptable length
       for (var i = 0; i < results.length; i++) {
@@ -117,6 +132,11 @@ $('form').on('submit', function(e) {
       destWeather = results.current_observation.weather;
       destWeatherImg = results.current_observation.icon_url;
       console.log('Your destination is currently ' + destWeather + ' and ' + destTemp + ' degrees. ');
+
+      //Plugging a few things into the results form
+      $('#temp').html(destTemp);
+      //Plugging a few things into the results form
+      $('#weath').html(' ' + destWeather);
     });
   });
 });
