@@ -109,7 +109,18 @@ footer a {
 .btn-lg {
   background-color: #205f65
   color: white;
+}
 
+.openSettings {
+  background-color: #51f0ff
+  color: white;
+}
+
+.modal {
+  position: absolute;
+  margin-top: 100px;
+  border-radius: 20px;
+  
 }
 
 a {
