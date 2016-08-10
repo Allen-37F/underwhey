@@ -11,7 +11,7 @@
 }
 
 html {
-  background-image: url('../../images/pic2.jpg');
+  background-image: image('../../images/pic2.jpg');
   background-size: 100%;;
 }
 
@@ -32,7 +32,8 @@ nav {
 
  header {
    text-align: center;
-
+   background-color: #205f65;
+   color: white;
  }
 
 .mainForm, .resultsForm {
@@ -65,9 +66,6 @@ nav {
   float: left
 }
 
-.resultsForm {
-  text-align: center;
-}
 
 .packingList {
   /*float: left;*/ XXX
