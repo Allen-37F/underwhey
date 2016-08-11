@@ -27,7 +27,7 @@ $('#saveThisLoc').on('change', function(e) {
 $('form').on('submit', function(e) {
   if (!$('#destination').val())  {
     alert('Please enter a valid destination');
-    location.reload()
+    location.reload();
   }
   e.preventDefault();
   console.log('caught submit data');
@@ -53,8 +53,8 @@ $('form').on('submit', function(e) {
   var departureTime = '&departure_time=' + departTime;
   var traffic = '&traffic_model=best_guess';
   var originPrefix = 'origin=';
-  originUnparsed = $('#home-address').parent().find("> span").html();
-  var origin = originUnparsed.split(' ').join('+')
+  originUnparsed = $('#home-address').parent().find('> span').html();
+  var origin = originUnparsed.split(' ').join('+');
   var destPrefix = '&destination=';
   var destLatLong;
   var destTitle;
@@ -76,7 +76,7 @@ $('form').on('submit', function(e) {
 
     //I probably should parse some results?
 
-    //This is the iTunes API Call. Looks like it works!
+    //This is the iTunes API Call. Looks like it works, but I need to tweak it before I install it on the page!
     const ITUNES_URL = 'https://itunes.apple.com/search';
     //XXX change inputs for this parameter
     var artist = 'stuffyoushouldknow';
@@ -91,7 +91,6 @@ $('form').on('submit', function(e) {
       dataType: 'jsonp',
       url: ITUNES_QUERY
     }).done(function(results) {
-      //DurationInTraffic isn't right if the trip is more than an hour long because parsing; perhaps suggest the user listen to anything he/she wants?
 
       // console.log(results);
       //trying to sort the results and collect a few with acceptable length
@@ -103,6 +102,7 @@ $('form').on('submit', function(e) {
         // console.log(results.results[8].trackTimeMillis);
       }
     });
+
     //Wunderground API call for destination weather:
     var destWeather;
     var destTemp;
@@ -110,7 +110,6 @@ $('form').on('submit', function(e) {
 
     const WEATHER_URL = 'http://api.wunderground.com/api/903be07b671ce816/conditions/q/' + destLatLong + '.json';
     const WUNDERKEY = '903be07b671ce816';
-    console.log();
     $.ajax({
       method: 'GET',
       jsonp: 'callback',
@@ -120,15 +119,14 @@ $('form').on('submit', function(e) {
       destTemp = results.current_observation.feelslike_f;
       destWeather = results.current_observation.weather;
       destWeatherImg = results.current_observation.icon_url;
-      console.log('Your destination is currently ' + destWeather + ' and ' + destTemp + ' degrees. ');
 
       //Plugging a few things into the results form
-      $('#weather-img').attr("src").replace(destWeatherImg);
+      $('#weather-img').attr('src', results.current_observation.icon_url);
       $('#temp').html(destTemp);
       $('#weath').html(' ' + destWeather);
       if (destWeather == 'Clear') {
-        $('.packingList').append('<li>Sunglasses</li>')
-        $('.packingList').append('<li>Sunscreen</li>')
+        $('.packingList').append('<li>Sunglasses</li>');
+        $('.packingList').append('<li>Sunscreen</li>');
       }
       if (destWeather === 'Overcast' || destWeather === 'Thunderstorms' || destWeather === 'Raining' || destWeather === 'Scattered Showers') {
         $('.packingList').append('<li>Umbrella</li>');
@@ -140,19 +138,33 @@ $('form').on('submit', function(e) {
         $('.packingList').append('<li>Warm coat</li>');
         $('.packingList').append('<li>Gloves and a toque</li>');
       }
-      if (destTemp >90) {
+      if (destTemp > 90) {
         $('.packingList').append('<li>Extra water</li>');
       }
       if (dest.duration_in_traffic.value > 4000) {
         $('.packingList').append('<li>Lickies and chewies for the trip</li>');
 
       }
-      if (familyComing == true) {
+      if (familyComing === true) {
         $('.packingList').append($('#family-member-items').html());
       }
-      console.log('Nabbing the length of the trip' + dest.duration_in_traffic.value);
       if (dest.duration_in_traffic.value > 3000) {
         $('#podcast-recs').html('This is going to be a long trip. Download a few interesting-looking podcast episodes; you\'ll have time!');
+      }
+      if (destination.indexOf('park') > -1) {
+        $('.packingList').append('<li>Asthma inhaler</li>');
+      }
+      if (destination.indexOf('beach') > -1) {
+        $('.packingList').append('<li>Swimsuit</li>');
+        $('.packingList').append('<li>Towel</li>');
+      }
+      if (destination.indexOf('triangle') > -1) {
+        $('.packingList').append('<li>Galvanize Keycard</li>');
+        $('.packingList').append('<li>Laptop and charger</li>');
+        $('.packingList').append('<li>Packed lunch</li>');
+      }
+      if (destination.indexOf('park') > -1) {
+        $('.packingList').append('<li>Asthma inhaler</li>');
       }
     });
   });
