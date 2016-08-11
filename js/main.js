@@ -29,7 +29,7 @@ $('form').on('submit', function(e) {
   console.log('caught submit data');
   //raw form data:
   var destinationUnparsed = $('#destination').val();
-  var familyComing = $('#familyComing').val();
+  var familyComing = $('#familyComing').is(':checked');
   console.log('family coming: ' + familyComing);
 
   var inHours = parseInt($('#leavingHours').val()) || 0;
@@ -48,9 +48,9 @@ $('form').on('submit', function(e) {
 
   var departureTime = '&departure_time=' + departTime;
   var traffic = '&traffic_model=best_guess';
-  //Origin is my house on Allison and destination is Galvanize in this example
   var originPrefix = 'origin=';
-  var origin = '39.799395,-105.085765';
+  originUnparsed = $('#home-address').parent().find("> span").html();
+  var origin = originUnparsed.split(' ').join('+')
   var destPrefix = '&destination=';
   var destLatLong;
   var destTitle;
@@ -64,27 +64,12 @@ $('form').on('submit', function(e) {
     duration = dest.duration.text;
     // console.log('Average trip duration: ' + duration);
     durationInTraffic = dest.duration_in_traffic.text;
-    console.log('Duration in current traffic: ' + durationInTraffic);
     destLatLong = dest.end_location.lat + ',' + dest.end_location.lng;
     destTitle = dest.end_address.substring(0, dest.end_address.indexOf(','));
-    var delay = durationInTraffic - duration.parseInt;
-    console.log('title of destination: ' + destTitle);
-
     //Plugging a few things into the results form
     $('#yourDest').html(destTitle);
     $('#travelTime').html(durationInTraffic);
 
-    console.log("delay: " + delay)
-    positiveDelay = function() {
-      if (delay >1) {
-        $('#trafficDelay').html(delay);
-      } else {
-        $('#delayYes').html();
-      }
-    }
-
-
-    console.log(destTitle);
     //I probably should parse some results?
 
     //This is the iTunes API Call. Looks like it works!
@@ -135,8 +120,27 @@ $('form').on('submit', function(e) {
 
       //Plugging a few things into the results form
       $('#temp').html(destTemp);
-      //Plugging a few things into the results form
       $('#weath').html(' ' + destWeather);
+      if (destWeather == 'Clear') {
+        $('.packingList').append('<li>Sunglasses</li>')
+        $('.packingList').append('<li>Sunscreen</li>')
+      }
+      if (destWeather === 'Overcast' || destWeather === 'Thunderstorms' || destWeather === 'Raining' || destWeather === 'Scattered Showers') {
+        $('.packingList').append('<li>Umbrella</li>');
+      }
+      if (destTemp < 55 && destTemp > 30) {
+        $('.packingList').append('<li>Jacket</li>');
+      }
+      if (destTemp < 30 || (destWeather === 'Snowing' || destWeather === 'SnowShowers')) {
+        $('.packingList').append('<li>Warm coat</li>');
+        $('.packingList').append('<li>Gloves and a toque</li>');
+      }
+      if (destTemp >90) {
+        $('.packingList').append('<li>Extra water</li>');
+      }
+      if (familyComing == true) {
+        $('.packingList').append($('#family-member-items').html());
+      }
     });
   });
 });

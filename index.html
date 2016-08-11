@@ -75,12 +75,9 @@
         <div class="checkbox divider">
           <label><input type="checkbox" id="familyComing"> I'm bringing </span id="familyMember">Elsie!</span></label>
         </div>
-
-        <label for="options">Parameter 3</label>
-        <input type="options" class="form-control" id="options">
       </div>
       <!-- To make this button link to the results page, put in in a element with href="html/results.html -->
-      <button type="submit" class="submitBtn btn-lg btn-default" title"Click here to find out what you'll need for your trip!">Let's go!</button>
+      <button type="submit" class="submitBtn btn-lg btn-default" data-toggle="popover" data-placement="right" data-content="be prepared!" title"Click here to find out what you'll need for your trip!">Let's go!</button>
     </form>
 
     <!-- Results form - this is hidden until the form is submitted -->
@@ -89,10 +86,10 @@
         <h2>You're going to <span id="yourDest">Galvanize Golden Triangle</h2>
       </div>
       <div class="form-group">
-        <h3>Travel time to destination: <span id="travelTime">25 minutes</span>.<br><span id="delayYes"> Current traffic is likely to add about <span id="trafficDelay"></span> minutes </span></h3>
+        <h3>Travel time to destination: <span id="travelTime"> calculating...</span>.<br></h3>
       </div>
       <div class="form-group">
-        <h3>Weather at destination on arrival: <span id="temp">  </span> degrees | <span id="weath"> </span>.</h3>
+        <h3>Weather at destination on arrival: <span id="temp"> calculating... </span> degrees | <span id="weath"> </span>.</h3>
       </div>
       <div class="form-group">
         <h3>Don't forget to bring:</h3>
@@ -100,18 +97,18 @@
           <ul class="packingList">
             <li>Laptop and charger</li>
             <li>Packed lunch</li>
-            <li>Umbrella</li>
             <li>Galvanize keycard</li>
           </ul>
         </div>
       </div>
       <div class="form-group">
         <h3>What should I listen to?</h3>
-        <ul id="audioRecommendations"><h5>Podcasts:</h5>
-          <li>Javascript Jabber #223 - WebStorm with Dennis Ushakov | Length: 22 minutes</li>
-          <li>{Coding Blocks} #44 - Stack Overflow Salaries and Landing the Job | Length: 24 minutes</li>
+        <ul id="audioRecommendations">
+          <h5>Podcasts:</h5>
+          <li>Javascript Jabber #223 - WebStorm with Dennis Ushakov | Length: 32 minutes</li>
+          <li>{Coding Blocks} #44 - Stack Overflow Salaries and Landing the Job | Length: 34 minutes</li>
           <li>Reply All #71 - The Picture Taker | Length: 21 minutes</li>
-          <li>Stuff You Should Know #446 - How the Moonwalk Works | Length - 25 minutes</li>
+          <li>Stuff You Should Know #446 - How the Moonwalk Works | Length: 34 minutes</li>
           <h5>Audio Books</h5>
           <li>Pillars of the Earth - by Ken Follett</li>
           <li>The Art of Racing in the Rain - by Garth Stein</li>
@@ -127,15 +124,55 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Customize your preferences:</h4>
         </div>
-        <div class="form-group modal-body">
-          <p>Current User: Allen Fordham</p>
+        <div class="form-group">
+          <h4>Current User:</h4> <span id="user-name">Allen Fordham</span>
         </div>
         <div class="form-group">
-          Home address: 5400 Allison St, Arvada CO 80002
+          <h4>Home address:</h4> <span id="home-address">5400 Allison St, Arvada CO 80002</span>
         </div>
         <div class="form-group">
           <h4>Family members</h4>
-          I have a dog named <span id="familyMember">Elsie</span>
+          I have a family member named <span id="familyMember">Elsie</span>
+          <ul id='family-member-items'>
+            <li>Leash</li>
+            <li>Poop bags</li>
+          </ul>
+        </div>
+        <div class="savedDestinations"><h4>Saved destinations:</h4>
+          <ol>
+          <li>Galvanize Golden Triangle</li>
+            <ul>
+              <li>Laptop and charger</li>
+              <li>Galvanize keycard</li>
+              <li>Packed Lunch</li>
+            </ul>
+          <li>Auntie Em's House</li>
+            <ul>
+              <li>Ruby Slippers</li>
+              <li>Anti-witch Super Soaker</li>
+            </ul>
+          <li>Evergreen Dog Park</li>
+            <ul>
+              <li>Ball and Launcher</li>
+              <li>Dog water and bowl</li>
+            </ul>
+          </ol>
+        </div>
+        <div class="form-group podcastList">
+          <h4>My podcasts:</h4>
+          <ul id="my-podcast">
+            <li>Javascript Jabber</li>
+            <li>{Coding Blocks}</li>
+            <li>Reply All</li>
+            <li>Stuff You Should Know</li>
+          </ul>
+        </div>
+        <div class="form-group audioBookList">
+          <h4>My audio books:</h4>
+          <ul id="my-book">
+            <li>Pillars of the Earth - by Ken Follett</li>
+            <li>The Art of Racing in the Rain - by Garth Stein</li>
+            <li>Kama Sutra for the Visually Impaired - by Vātsyāyana</li>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
