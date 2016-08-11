@@ -24,11 +24,22 @@ $('#saveThisLoc').on('change', function(e) {
   $('#newLocName').toggle();
 });
 
+$('#dest-a').on('click', function(e) {
+  $('#destination').val('Galvanize Golden Triangle, Denver, Colorado');
+});
+$('#dest-b').on('click', function(e) {
+  $('#destination').val('7754 West 95th Way, Westminster, CO');
+});
+$('#dest-c').on('click', function(e) {
+  $('#destination').val('Evergreen Hills Dog Park, Evergreen, CO');
+});
+
 $('form').on('submit', function(e) {
   if (!$('#destination').val())  {
     alert('Please enter a valid destination');
     location.reload();
   }
+
   e.preventDefault();
   console.log('caught submit data');
   //raw form data:
@@ -151,20 +162,25 @@ $('form').on('submit', function(e) {
       if (dest.duration_in_traffic.value > 3000) {
         $('#podcast-recs').html('This is going to be a long trip. Download a few interesting-looking podcast episodes; you\'ll have time!');
       }
-      if (destination.indexOf('park') > -1) {
+      if (destination.indexOf('Park') > -1) {
         $('.packingList').append('<li>Asthma inhaler</li>');
       }
       if (destination.indexOf('beach') > -1) {
         $('.packingList').append('<li>Swimsuit</li>');
         $('.packingList').append('<li>Towel</li>');
       }
-      if (destination.indexOf('triangle') > -1) {
+      if (destination.indexOf('Triangle') > -1) {
         $('.packingList').append('<li>Galvanize Keycard</li>');
         $('.packingList').append('<li>Laptop and charger</li>');
         $('.packingList').append('<li>Packed lunch</li>');
       }
-      if (destination.indexOf('park') > -1) {
-        $('.packingList').append('<li>Asthma inhaler</li>');
+      if (destination.indexOf('Dog') > -1) {
+        $('.packingList').append('<li>Tennis ball and launcher</li>');
+        $('.packingList').append('<li>Dog bowl and water</li>');
+      }
+      if (destination.indexOf('theater') > -1) {
+        $('.packingList').append('<li>Snacks to sneak in</li>');
+        $('.packingList').append('<li>Phone on silent!</li>');
       }
     });
   });
