@@ -10,11 +10,6 @@
   format("truetype");
 }
 
-html {
-  background-image: image('../../images/pic2.jpg');
-  background-size: 100%;;
-}
-
 div {
   font-family: "Raleway-Thin", sans-serif;
 }
@@ -129,4 +124,10 @@ a {
 
 .footer2 {
   display: none;
+}
+
+html {
+  background-image: url('../images/pic2.jpg');
+  background-size: 100%;
+  /*background-color: black;*/
 }

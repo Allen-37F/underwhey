@@ -16,7 +16,7 @@ $('.submitBtn').on('click', function(e) {
 
 $('#savedLocation').on('change', function(e) {
   $('.savedLocations').toggle();
-  $('#destination').toggle();
+  // $('#destination').toggle();
   $('#saveThisLoc').toggle();
 });
 
@@ -25,6 +25,10 @@ $('#saveThisLoc').on('change', function(e) {
 });
 
 $('form').on('submit', function(e) {
+  if (!$('#destination').val())  {
+    alert('Please enter a valid destination');
+    location.reload()
+  }
   e.preventDefault();
   console.log('caught submit data');
   //raw form data:
@@ -119,6 +123,7 @@ $('form').on('submit', function(e) {
       console.log('Your destination is currently ' + destWeather + ' and ' + destTemp + ' degrees. ');
 
       //Plugging a few things into the results form
+      $('#weather-img').attr("src").replace(destWeatherImg);
       $('#temp').html(destTemp);
       $('#weath').html(' ' + destWeather);
       if (destWeather == 'Clear') {
@@ -138,8 +143,16 @@ $('form').on('submit', function(e) {
       if (destTemp >90) {
         $('.packingList').append('<li>Extra water</li>');
       }
+      if (dest.duration_in_traffic.value > 4000) {
+        $('.packingList').append('<li>Lickies and chewies for the trip</li>');
+
+      }
       if (familyComing == true) {
         $('.packingList').append($('#family-member-items').html());
+      }
+      console.log('Nabbing the length of the trip' + dest.duration_in_traffic.value);
+      if (dest.duration_in_traffic.value > 3000) {
+        $('#podcast-recs').html('This is going to be a long trip. Download a few interesting-looking podcast episodes; you\'ll have time!');
       }
     });
   });
