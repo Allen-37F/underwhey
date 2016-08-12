@@ -146,7 +146,7 @@ $('form').on('submit', function(e) {
             $('#podcast-recs').append('<li>' + selectedPodcast.artistName + ' - ' + selectedPodcast.name + ' | Length: ' + Math.round((selectedPodcast.time) / 60000) + ' minutes</li>');
           }
         }
-        addPodcast()
+        addPodcast();
       });
     });
 
