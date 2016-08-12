@@ -93,6 +93,7 @@ $('form').on('submit', function(e) {
     const ITUNES_URL = 'https://itunes.apple.com/search';
     //XXX change inputs for this parameter
     var artist = 'stuffyoushouldknow';
+    var dateOfPodcast; XXX
     var milliseconds = (parseInt(durationInTraffic) * 60000);
     console.log('Your trip will currently have a duration of ' + milliseconds + ', searching for podcasts that match your commute.');
     var queryString = '?term=' + artist + '&kind=podcast';
