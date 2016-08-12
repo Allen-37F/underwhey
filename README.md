@@ -1,6 +1,9 @@
 # Welcome to UnderWhey, my unit 1 project!
 
+Link to deployed site: https://allen-37f.github.io/underwhey/
+Link to Github repo: https://github.com/Allen-37F/underwhey
 Link to Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1783231
+
 
 ### UnderWhey is a trip planning tool. Whether you're heading to work in the morning or planning a road trip, UnderWhey can make sure you're prepared. Just tell it where you're going!
 
