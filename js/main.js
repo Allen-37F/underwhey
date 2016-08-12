@@ -84,39 +84,44 @@ $('form').on('submit', function(e) {
     $('#yourDest').html(destTitle);
     $('#travelTime').html(durationInTraffic);
 
-
-    podcastResultsArray = []
-
-    //I probably should parse some results?
-
     //This is the iTunes API Call. Looks like it works, but I need to tweak it before I install it on the page!
+    podcastResultsArray = [];
     const ITUNES_URL = 'https://itunes.apple.com/search';
     //XXX change inputs for this parameter
+
     var artist = 'stuffyoushouldknow';
-    var dateOfPodcast; XXX
+    // var dateOfPodcast;
     var milliseconds = (parseInt(durationInTraffic) * 60000);
     console.log('Your trip will currently have a duration of ' + milliseconds + ', searching for podcasts that match your commute.');
-    var queryString = '?term=' + artist + '&kind=podcast';
+    var queryString = '?term=' + artist + '&kind=podcast&limit=200';
+    var songsThatFit = [];
     const ITUNES_QUERY = ITUNES_URL + queryString;
-    // console.log(URL);
+    console.log(ITUNES_QUERY);
     $.ajax({
       method: 'GET',
       jsonp: 'callback',
       dataType: 'jsonp',
       url: ITUNES_QUERY
     }).done(function(results) {
-      podcastResultsArray = results
-      console.log(results);
-      console.log('test' + podcastResultsArray.results[30].trackTimeMillis);
+      podcastResultsArray = results;
 
-      // console.log(results);
-      //trying to sort the results and collect a few with acceptable length
-      // var songsThatFit = [];
-      // for (var i = 0; i < results.length; i++) {
-      //   if (results.results[i].trackTimeMillis < (milliseconds + 120000) && results.results[i].trackTimeMillis < (milliseconds - 300000)) {
-      //     console.log('working so far!');
-      //   }
-      // }
+      console.log(podcastResultsArray.results.length);
+      // trying to sort the results and collect a few with acceptable length
+      for (var i = 0; i < podcastResultsArray.results.length; i++) {
+        if (((podcastResultsArray.results[i].trackTimeMillis) < (milliseconds + 120000)) && ((podcastResultsArray.results[i].trackTimeMillis) > (milliseconds - 500000))) {
+          console.log('Adding a podcast... total length = ' + songsThatFit.length);
+          songsThatFit.push({
+            name: podcastResultsArray.results[i].collectionName,
+            time: podcastResultsArray.results[i].trackTimeMillis
+          });
+        }
+      }
+      console.log(songsThatFit);
+
+      var selectedPodcast = songsThatFit[Math.floor(Math.random() * songsThatFit.length)];
+        console.log(selectedPodcast);
+
+
     });
 
     //Wunderground API call for destination weather:
