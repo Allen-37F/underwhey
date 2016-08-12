@@ -1,5 +1,18 @@
+var podcastElements = [
+  'Javascript Jabber',
+  'Coding Blocks',
+  'Reply All',
+  'Stuff You Should Know',
+  'This American Life',
+  'Invisibilia',
+  'Revisionist History',
+  'Stuff You Missed in History Class'
+];
+
 $(document).on('ready', function() {
-  console.log('so far, so good!');
+  podcastElements.forEach(function(el) {
+    $('#my-podcast').append('<li>' + el + '</li>');
+  });
 });
 
 $('#openOptions').on('change', function(e) {
@@ -85,43 +98,56 @@ $('form').on('submit', function(e) {
     $('#travelTime').html(durationInTraffic);
 
     //This is the iTunes API Call. Looks like it works, but I need to tweak it before I install it on the page!
+
     podcastResultsArray = [];
-    const ITUNES_URL = 'https://itunes.apple.com/search';
-    //XXX change inputs for this parameter
 
-    var artist = 'stuffyoushouldknow';
-    // var dateOfPodcast;
-    var milliseconds = (parseInt(durationInTraffic) * 60000);
-    console.log('Your trip will currently have a duration of ' + milliseconds + ', searching for podcasts that match your commute.');
-    var queryString = '?term=' + artist + '&kind=podcast&limit=200';
-    var songsThatFit = [];
-    const ITUNES_QUERY = ITUNES_URL + queryString;
-    console.log(ITUNES_QUERY);
-    $.ajax({
-      method: 'GET',
-      jsonp: 'callback',
-      dataType: 'jsonp',
-      url: ITUNES_QUERY
-    }).done(function(results) {
-      podcastResultsArray = results;
+    podcastElements.forEach(function(el) {
 
-      console.log(podcastResultsArray.results.length);
-      // trying to sort the results and collect a few with acceptable length
-      for (var i = 0; i < podcastResultsArray.results.length; i++) {
-        if (((podcastResultsArray.results[i].trackTimeMillis) < (milliseconds + 120000)) && ((podcastResultsArray.results[i].trackTimeMillis) > (milliseconds - 500000))) {
-          console.log('Adding a podcast... total length = ' + songsThatFit.length);
-          songsThatFit.push({
-            name: podcastResultsArray.results[i].collectionName,
-            time: podcastResultsArray.results[i].trackTimeMillis
-          });
+      const ITUNES_URL = 'https://itunes.apple.com/search';
+      //XXX change inputs for this parameter
+
+      var artist = (el.split(' ').join('')).toLowerCase();
+      console.log(artist);
+
+      // var dateOfPodcast;
+      var milliseconds = (parseInt(durationInTraffic) * 60000);
+      var queryString = '?term=' + artist + '&media=podcast&entity=song&sort=recent&limit=200';
+      var songsThatFit = [];
+      const ITUNES_QUERY = ITUNES_URL + queryString;
+      // console.log(ITUNES_QUERY);
+      $.ajax({
+        method: 'GET',
+        jsonp: 'callback',
+        dataType: 'jsonp',
+        url: ITUNES_QUERY
+      }).done(function(results) {
+        podcastResultsArray = results;
+        // console.log(podcastResultsArray);
+        // console.log('Found this many podcasts: ' + podcastResultsArray.results.length);
+        // console.log(podcastResultsArray.results);
+        // trying to sort the results and collect a few with acceptable length
+        for (var i = 0; i < 100; i++) {
+          if (((podcastResultsArray.results[i].trackTimeMillis) < (milliseconds + 360000)) && ((podcastResultsArray.results[i].trackTimeMillis) > (milliseconds - 240000))) {
+            // console.log('Adding a podcast... total length = ' + songsThatFit.length);
+            songsThatFit.push({
+              name: podcastResultsArray.results[i].collectionName,
+              time: podcastResultsArray.results[i].trackTimeMillis,
+              artistName: podcastResultsArray.results[i].artistName
+            });
+          }
         }
-      }
-      console.log(songsThatFit);
 
-      var selectedPodcast = songsThatFit[Math.floor(Math.random() * songsThatFit.length)];
-        console.log(selectedPodcast);
+        console.log('songs that fit: ' + songsThatFit);
 
-
+        var selectedPodcast = songsThatFit[Math.floor(Math.random() * songsThatFit.length)];
+        // console.log(selectedPodcast);
+        function addPodcast() {
+          if ((!durationInTraffic.includes('hour')) || (!durationInTraffic.includes('day'))) {
+            $('#podcast-recs').append('<li>' + selectedPodcast.artistName + ' - ' + selectedPodcast.name + ' | Length: ' + Math.round((selectedPodcast.time) / 60000) + ' minutes</li>');
+          }
+        }
+        addPodcast()
+      });
     });
 
     //Wunderground API call for destination weather:
