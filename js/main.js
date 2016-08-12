@@ -60,7 +60,6 @@ $('form').on('submit', function(e) {
     return departTime;
   };
   nowPlus(inHours);
-
   var departureTime = '&departure_time=' + departTime;
   var traffic = '&traffic_model=best_guess';
   var originPrefix = 'origin=';
@@ -69,7 +68,7 @@ $('form').on('submit', function(e) {
   var destPrefix = '&destination=';
   var destLatLong;
   var destTitle;
-  var mapsUrl = 'http://galvanize-cors-proxy.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?' + originPrefix + origin + destPrefix + destination + departureTime + traffic + KEY;
+  var mapsUrl = 'https://galvanize-cors-proxy.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?' + originPrefix + origin + destPrefix + destination + departureTime + traffic + KEY;
 
   $.ajax({
     method: 'GET',
@@ -84,6 +83,9 @@ $('form').on('submit', function(e) {
     //Plugging a few things into the results form
     $('#yourDest').html(destTitle);
     $('#travelTime').html(durationInTraffic);
+
+
+    podcastResultsArray = []
 
     //I probably should parse some results?
 
@@ -102,16 +104,18 @@ $('form').on('submit', function(e) {
       dataType: 'jsonp',
       url: ITUNES_QUERY
     }).done(function(results) {
+      podcastResultsArray = results
+      console.log(results);
+      console.log('test' + podcastResultsArray.results[30].trackTimeMillis);
 
       // console.log(results);
       //trying to sort the results and collect a few with acceptable length
-      for (var i = 0; i < results.length; i++) {
-        // console.log('test' + results.results[i].trackTimeMillis);
-        if (results.results[i].trackTimeMillis > 1000000) {
-          console.log('working so far!');
-        }
-        // console.log(results.results[8].trackTimeMillis);
-      }
+      // var songsThatFit = [];
+      // for (var i = 0; i < results.length; i++) {
+      //   if (results.results[i].trackTimeMillis < (milliseconds + 120000) && results.results[i].trackTimeMillis < (milliseconds - 300000)) {
+      //     console.log('working so far!');
+      //   }
+      // }
     });
 
     //Wunderground API call for destination weather:
@@ -119,7 +123,7 @@ $('form').on('submit', function(e) {
     var destTemp;
     var destWeatherImg;
 
-    const WEATHER_URL = 'http://api.wunderground.com/api/903be07b671ce816/conditions/q/' + destLatLong + '.json';
+    const WEATHER_URL = 'https://api.wunderground.com/api/903be07b671ce816/conditions/q/' + destLatLong + '.json';
     const WUNDERKEY = '903be07b671ce816';
     $.ajax({
       method: 'GET',
@@ -154,7 +158,9 @@ $('form').on('submit', function(e) {
       }
       if (dest.duration_in_traffic.value > 4000) {
         $('.packingList').append('<li>Lickies and chewies for the trip</li>');
-
+      }
+      if (dest.duration_in_traffic.value > 6000) {
+        $('.packingList').append('<li>Change of clothes - you\'ll likely be spending the night.</li>');
       }
       if (familyComing === true) {
         $('.packingList').append($('#family-member-items').html());
